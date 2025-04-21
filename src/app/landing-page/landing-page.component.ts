@@ -38,6 +38,20 @@ export class LandingPageComponent {
     }
   }
 
+  loadSampleCv() {
+    // Save the sample CV data to localStorage
+    try {
+      localStorage.setItem('cvData', JSON.stringify(sampleCv));
+      console.log('Sample CV data loaded');
+      
+      // Navigate to the PDF view to display the sample CV
+      this.router.navigate(['/pdf-view']);
+    } catch (error) {
+      console.error('Error loading sample CV:', error);
+      alert('Error loading sample CV data. Please try again.');
+    }
+  }
+
   downloadSampleJson() {
     const jsonStr = JSON.stringify(sampleCv, null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });

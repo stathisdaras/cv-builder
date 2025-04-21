@@ -15,6 +15,24 @@
 
       <!-- Right side - Action buttons -->
       <div class="flex items-center space-x-4">
+        <!-- Add Photo Button - Only show when no image is uploaded -->
+        <button *ngIf="!profileImage || profileImage === placeholderImage" 
+          type="button"
+          (click)="triggerImageUpload()"
+          class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <span class="material-icons text-[20px] mr-2">add_photo_alternate</span>
+          Add Photo
+        </button>
+
+        <!-- Delete Photo Button - Only show when an image is uploaded -->
+        <button *ngIf="profileImage && profileImage !== placeholderImage" 
+          type="button"
+          (click)="removeProfileImage()"
+          class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+          <span class="material-icons text-red-500 text-[20px] mr-2">delete</span>
+          Remove Photo
+        </button>
+
         <!-- Edit Button -->
         <button type="button"
                 (click)="editCV()"
@@ -61,10 +79,12 @@
   <!-- Content to be converted to PDF -->
   <div id="pdf-content" class="p-4 text-justify max-w-4xl mx-auto" *ngIf="cvData">
     <div class="max-w-4xl mx-auto">
-      <div class="flex flex-col md:flex-row items-start gap-6 mb-4">
-        <div class="flex-shrink-0 align-top relative group cursor-pointer" (click)="triggerImageUpload()">
+      <!-- Header Section with Personal Info -->
+      <div class="flex flex-col md:flex-row items-start gap-6 mb-4 break-inside-avoid">
+        <!-- Only show image container if there's a profile image -->
+        <div *ngIf="profileImage && profileImage !== placeholderImage" class="flex-shrink-0 align-top relative group cursor-pointer" (click)="triggerImageUpload()">
           <img 
-            [src]="profileImage || placeholderImage"
+            [src]="profileImage"
             alt="Profile"
             class="w-[140px] h-[140px] rounded-full object-cover shadow-md transition-opacity duration-200 group-hover:opacity-70"
           >
@@ -73,6 +93,7 @@
           </div>
         </div>
 
+        <!-- Profile info - full width if no image -->
         <div class="flex-1 -mt-1 align-top">
           <h2 class="text-[10px] text-gray-600 m-0">{{cvData.title}}</h2>
           <h1 class="text-2xl mb-1 -mt-1">
@@ -98,7 +119,7 @@
       </div>
 
       <!-- Skills Section -->
-      <div class="mb-4 align-top">
+      <div class="mb-4 break-inside-avoid-page">
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
@@ -119,9 +140,9 @@
         </div>
       </div>
 
-      <!-- Work Experience -->
-      <div class="mb-4 align-top">
-        <table class="w-full mb-3 border-collapse break-inside-avoid">
+      <!-- Work Experience Section - Allow breaking between individual experiences -->
+      <div class="mb-4">
+        <table class="w-full mb-3 border-collapse break-inside-avoid" id="work-experience-header">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
               <span class="material-icons text-blue-500 text-base mt-1">work</span>
@@ -131,24 +152,26 @@
             </td>
           </tr>
         </table>
-        <div class="space-y-4">
-          <div *ngFor="let exp of cvData.workExperiences" class="border-l-4 border-blue-500 px-2 pb-3 pt-0 work-experience-item align-top">
+        <div class="space-y-3" id="work-experience-container">
+          <div *ngFor="let exp of cvData.workExperiences; let i = index" 
+               class="border-l-4 border-blue-500 px-2 pb-3 pt-0 avoid-break-inside"
+               [class.first-experience]="i === 0">
             <h3 class="text-base font-semibold m-0 pdf-position-margin">{{exp.position}}</h3>
             <p class="text-gray-600 text-sm m-0">{{exp.company}}</p>
             <p class="text-xs text-gray-500 mb-1 m-0">{{exp.startDate}} - {{exp.endDate}}</p>
             <p class="text-gray-700 mb-2 leading-tight text-sm m-0">{{exp.description}}</p>
             
-            <div *ngIf="exp.mainContributions && exp.mainContributions.length > 0" class="mt-2 align-top">
+            <div *ngIf="exp.mainContributions && exp.mainContributions.length > 0" class="mt-1">
               <h4 class="text-sm font-medium text-blue-600 mb-0 m-0">Key Contributions:</h4>
-              <div class="space-y-1 pl-3">
-                <div *ngFor="let contribution of exp.mainContributions" class="text-gray-700 leading-tight text-sm flex contribution-item align-top">
+              <div class="pl-3 break-after">
+                <div *ngFor="let contribution of exp.mainContributions" class="text-gray-700 leading-tight text-sm flex mt-1">
                   <span class="text-gray-800 mr-2 m-0">•</span>
                   <span class="m-0">{{contribution}}</span>
                 </div>
               </div>
             </div>
             
-            <div *ngIf="exp.techStack && exp.techStack.length > 0" class="mt-2 align-top">
+            <div *ngIf="exp.techStack && exp.techStack.length > 0" class="mt-1">
               <div class="flex items-center">
                 <h4 class="text-sm font-medium text-blue-600 mr-1 whitespace-nowrap m-0">Tech Stack:</h4>
                 <span class="text-gray-700 text-xs m-0">{{exp.techStack.join(', ')}}</span>
@@ -159,7 +182,7 @@
       </div>
 
       <!-- Education Section -->
-      <div class="mb-4 align-top">
+      <div class="mb-4 break-inside-avoid-page">
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
@@ -171,7 +194,7 @@
           </tr>
         </table>
         <div class="space-y-4">
-          <div *ngFor="let edu of cvData.education" class="border-l-4 border-blue-500 px-2 pb-3 pt-0 education-item align-top">
+          <div *ngFor="let edu of cvData.education" class="border-l-4 border-blue-500 px-2 pb-3 pt-0 avoid-break-inside align-top">
             <h3 class="text-base font-semibold m-0">{{edu.degree}}</h3>
             <p class="text-gray-600 text-sm m-0">{{edu.institution}}</p>
             <p class="text-xs text-gray-500 mb-1 m-0">{{edu.startDate}} - {{edu.endDate}}</p>
@@ -186,7 +209,7 @@
       </div>
 
       <!-- Certifications Section -->
-      <div class="mb-4 align-top">
+      <div class="mb-4 break-inside-avoid-page">
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
@@ -198,7 +221,7 @@
           </tr>
         </table>
         <div class="space-y-1">
-          <div *ngFor="let cert of cvData.certifications" class="border-l-4 border-blue-500 px-2 pb-2 pt-0 certification-item align-top">
+          <div *ngFor="let cert of cvData.certifications" class="border-l-4 border-blue-500 px-2 pb-2 pt-0 avoid-break-inside align-top">
             <div class="flex items-center">
               <h3 class="text-base font-semibold m-0 mr-1">{{cert.certificationName}}</h3>
               <span class="text-gray-600 text-xs m-0">- {{cert.institution}}</span>
@@ -208,7 +231,7 @@
       </div>
 
       <!-- Languages Section -->
-      <div class="mb-4 align-top">
+      <div class="mb-4 break-inside-avoid-page">
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
@@ -220,7 +243,7 @@
           </tr>
         </table>
         <div class="flex flex-wrap justify-between">
-          <div *ngFor="let lang of cvData.languages" class="border-l-4 border-blue-500 px-2 pb-2 pt-0 language-item align-top">
+          <div *ngFor="let lang of cvData.languages" class="border-l-4 border-blue-500 px-2 pb-2 pt-0 avoid-break-inside align-top">
             <h3 class="text-base font-semibold m-0">{{lang.name}}</h3>
             <p class="text-xs text-gray-600 m-0">{{lang.institute}}</p>
             <div class="flex items-center mt-0">
@@ -233,7 +256,7 @@
       </div>
 
       <!-- Interests Section -->
-      <div class="mb-4 align-top">
+      <div class="mb-4 break-inside-avoid-page">
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
@@ -250,7 +273,7 @@
       </div>
 
       <!-- References Section -->
-      <div class="mb-4 align-top">
+      <div class="mb-4 break-inside-avoid-page">
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">

@@ -93,15 +93,53 @@ export class PdfViewComponent implements OnInit {
     this.imageInput.nativeElement.click();
   }
 
+  removeProfileImage() {
+    // Reset to placeholder image
+    this.profileImage = this.placeholderImage;
+    
+    // Update the CV data
+    if (this.cvData) {
+      this.cvData.profileImage = null;
+      
+      // Save to localStorage
+      localStorage.setItem('cvData', JSON.stringify(this.cvData));
+      console.log('Profile image removed');
+    }
+  }
+
   onImageUpload(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
+      // Check if file is an image
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
+        return;
+      }
+
+      // Check file size (limit to 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size should be less than 5MB');
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = (e) => {
+        // Store the full quality image
         this.profileImage = e.target?.result as string;
         if (this.cvData) {
           this.cvData.profileImage = this.profileImage;
-          localStorage.setItem('cvData', JSON.stringify(this.cvData));
+          
+          // Save to localStorage (with warning about large images)
+          try {
+            localStorage.setItem('cvData', JSON.stringify(this.cvData));
+          } catch (err) {
+            console.error('Error saving to localStorage:', err);
+            alert('Your image is too large to be saved in the browser. Please use a smaller image.');
+            
+            // Reset the image to placeholder
+            this.profileImage = this.placeholderImage;
+            this.cvData.profileImage = this.placeholderImage;
+          }
         }
       };
       reader.readAsDataURL(file);
@@ -203,31 +241,97 @@ export class PdfViewComponent implements OnInit {
       return;
     }
 
-    const clone = element.cloneNode(true) as HTMLElement;
+    // Compress the profile image if it exists
+    let originalProfileImage = this.profileImage;
+    if (this.profileImage && this.profileImage !== this.placeholderImage && this.profileImage.startsWith('data:image')) {
+      try {
+        // Create a temporary image element to resize the image
+        const img = new Image();
+        img.src = this.profileImage;
+        
+        // Wait for image to load
+        await new Promise((resolve) => {
+          img.onload = resolve;
+        });
+        
+        // Create a canvas to resize the image
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');  
+        
+        // Set max dimensions for profile picture
+        const MAX_WIDTH = 300;
+        const MAX_HEIGHT = 300;
+        
+        // Calculate dimensions while maintaining aspect ratio
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+        
+        // Resize image
+        canvas.width = width;
+        canvas.height = height;
+        ctx?.drawImage(img, 0, 0, width, height);
+        
+        // Convert to compressed JPEG format
+        const compressedImage = canvas.toDataURL('image/jpeg', 0.7);
+        
+        // Temporarily replace the profile image with the compressed version
+        this.profileImage = compressedImage;
+        
+        // Update the image in the DOM
+        const profileImg = element.querySelector('.flex-shrink-0 img') as HTMLImageElement;
+        if (profileImg) {
+          profileImg.src = compressedImage;
+        }
+      } catch (error) {
+        console.error('Error compressing profile image:', error);
+      }
+    }
+
+    // Optimize margins to reduce whitespace
     const options = {
-      margin: 5,
+      margin: 10, // Simplified margin - using a single number to avoid type errors
       filename: `${this.cvData?.name || 'cv'}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
+      image: { type: 'jpeg', quality: 0.8 }, // Use JPEG with 80% quality instead of PNG
       html2canvas: { 
         scale: 2,
         useCORS: true,
-        letterRendering: true,
-        scrollY: 0
+        logging: false 
       },
       jsPDF: { 
         unit: 'mm', 
         format: 'a4', 
-        orientation: 'portrait' as const
+        orientation: 'portrait' as const,
+        compress: true // Enable compression
       },
-      pagebreak: { mode: 'avoid-all' }
+      pagebreak: { 
+        mode: 'css',
+        avoid: '.avoid-break-inside'
+      }
     };
 
     try {
-      await html2pdf().set(options).from(clone).save();
+      await html2pdf().set(options).from(element).save();
       console.log('PDF generated successfully');
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Error generating PDF. Please try again.');
+    } finally {
+      // Restore the original profile image
+      if (originalProfileImage) {
+        this.profileImage = originalProfileImage;
+      }
     }
   }
 
