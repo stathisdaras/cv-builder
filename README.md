@@ -60,4 +60,4 @@ MIT
 
 ## Author
 
-Your Name
+Stathis (Efstathios) Daras
