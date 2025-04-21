@@ -14,7 +14,8 @@
       </div>
 
       <!-- Right side - Action buttons -->
-      <div class="flex items-center space-x-4">
+      <!-- Desktop buttons (hidden on small screens) -->
+      <div class="hidden sm:flex items-center space-x-4">
         <!-- Add Photo Button - Only show when no image is uploaded -->
         <button *ngIf="!profileImage || profileImage === placeholderImage" 
           type="button"
@@ -62,6 +63,67 @@
           Download PDF
         </button>
       </div>
+
+      <!-- Mobile menu button (visible only on small screens) -->
+      <div class="sm:hidden">
+        <div class="relative">
+          <button type="button" 
+                  (click)="toggleMobileMenu()" 
+                  class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          
+          <!-- Mobile menu dropdown -->
+          <div *ngIf="showMobileMenu" 
+               class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
+            <div class="py-1">
+              <!-- Photo actions based on current state -->
+              <button *ngIf="!profileImage || profileImage === placeholderImage" 
+                type="button"
+                (click)="triggerImageUpload(); toggleMobileMenu()"
+                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                <span class="inline-block align-middle material-icons text-[18px] mr-2 text-blue-500">add_photo_alternate</span>
+                Add Photo
+              </button>
+              
+              <button *ngIf="profileImage && profileImage !== placeholderImage" 
+                type="button"
+                (click)="removeProfileImage(); toggleMobileMenu()"
+                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                <span class="inline-block align-middle material-icons text-[18px] mr-2 text-red-500">delete</span>
+                Remove Photo
+              </button>
+              
+              <!-- Edit CV -->
+              <button type="button"
+                      (click)="editCV(); toggleMobileMenu()"
+                      class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                <span class="inline-block align-middle material-icons text-[18px] mr-2 text-blue-500">edit</span>
+                Edit CV
+              </button>
+              
+              <!-- Upload JSON -->
+              <button type="button"
+                      (click)="onUploadClick(); toggleMobileMenu()"
+                      class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                <span class="inline-block align-middle material-icons text-[18px] mr-2 text-blue-500">upload_file</span>
+                Upload JSON
+              </button>
+              
+              <!-- Download PDF -->
+              <button type="button"
+                      (click)="downloadPDF(); toggleMobileMenu()"
+                      [disabled]="!cvData"
+                      class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="inline-block align-middle material-icons text-[18px] mr-2 text-blue-500">download</span>
+                Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -80,7 +142,7 @@
   <div id="pdf-content" class="p-4 text-justify max-w-4xl mx-auto" *ngIf="cvData">
     <div class="max-w-4xl mx-auto">
       <!-- Header Section with Personal Info -->
-      <div class="flex flex-col md:flex-row items-start gap-6 mb-4 break-inside-avoid">
+      <div id="profile-header" class="flex flex-col md:flex-row items-start gap-6 mb-4 ">
         <!-- Only show image container if there's a profile image -->
         <div *ngIf="profileImage && profileImage !== placeholderImage" class="flex-shrink-0 align-top relative group cursor-pointer" (click)="triggerImageUpload()">
           <img 
@@ -220,11 +282,11 @@
             </td>
           </tr>
         </table>
-        <div class="space-y-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <div *ngFor="let cert of cvData.certifications" class="border-l-4 border-blue-500 px-2 pb-2 pt-0 avoid-break-inside align-top">
-            <div class="flex items-center">
-              <h3 class="text-base font-semibold m-0 mr-1">{{cert.certificationName}}</h3>
-              <span class="text-gray-600 text-xs m-0">- {{cert.institution}}</span>
+            <div class="flex flex-col sm:flex-row sm:items-center">
+              <h3 class="text-base font-semibold m-0">{{cert.certificationName}}</h3>
+              <span class="text-gray-600 text-xs m-0 sm:ml-1">- {{cert.institution}}</span>
             </div>
           </div>
         </div>
@@ -242,7 +304,7 @@
             </td>
           </tr>
         </table>
-        <div class="flex flex-wrap justify-between">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
           <div *ngFor="let lang of cvData.languages" class="border-l-4 border-blue-500 px-2 pb-2 pt-0 avoid-break-inside align-top">
             <h3 class="text-base font-semibold m-0">{{lang.name}}</h3>
             <p class="text-xs text-gray-600 m-0">{{lang.institute}}</p>
@@ -277,7 +339,7 @@
         <table class="w-full mb-3 border-collapse break-inside-avoid">
           <tr>
             <td class="w-6 align-top border-b-2 border-blue-500 pb-1.5">
-              <span class="material-icons text-blue-500 text-base mt-4">people</span>
+              <span class="material-icons text-blue-500 text-base mt-1.5">people</span>
             </td>
             <td class="border-b-2 border-blue-500 pb-1.5">
               <h2 class="text-lg font-bold m-0">References</h2>

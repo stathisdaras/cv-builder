@@ -24,7 +24,8 @@ export class PdfViewComponent implements OnInit {
   @ViewChild('imageInput') imageInput!: ElementRef;
   cvData: any = null;
   profileImage: string | null = null;
-  readonly placeholderImage = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png';
+  readonly placeholderImage = '../../assets/images/placeholder-image.png';
+  showMobileMenu = false;
 
   constructor(
     private cvDataService: CvDataService,
@@ -241,6 +242,14 @@ export class PdfViewComponent implements OnInit {
       return;
     }
 
+    // Force the profile header to horizontal layout for PDF generation
+    const headerElement = document.getElementById('profile-header');
+    let originalClasses = '';
+    if (headerElement) {
+      originalClasses = headerElement.className;
+      headerElement.className = originalClasses.replace('flex-col', 'flex-row');
+    }
+
     // Compress the profile image if it exists
     let originalProfileImage = this.profileImage;
     if (this.profileImage && this.profileImage !== this.placeholderImage && this.profileImage.startsWith('data:image')) {
@@ -332,6 +341,11 @@ export class PdfViewComponent implements OnInit {
       if (originalProfileImage) {
         this.profileImage = originalProfileImage;
       }
+      
+      // Restore original layout classes
+      if (headerElement && originalClasses) {
+        headerElement.className = originalClasses;
+      }
     }
   }
 
@@ -352,5 +366,10 @@ export class PdfViewComponent implements OnInit {
       console.error('No CV data available to edit');
       alert('No CV data available to edit');
     }
+  }
+
+  // Toggle mobile menu visibility
+  toggleMobileMenu(): void {
+    this.showMobileMenu = !this.showMobileMenu;
   }
 }
