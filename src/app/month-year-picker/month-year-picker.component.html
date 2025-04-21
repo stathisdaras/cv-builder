@@ -1,0 +1,39 @@
+<div class="month-year-picker">
+  <label *ngIf="label" class="block text-sm font-medium text-gray-700 mb-1">{{ label }}</label>
+  
+  <div class="flex items-center gap-4 w-full">
+    <!-- Date Picker -->
+    <div class="relative flex-grow min-h-[42px]" *ngIf="!isPresent">
+      <p-datePicker 
+        [ngModel]="dateValue"
+        (ngModelChange)="onDateSelect($event)"
+        [showIcon]="false" 
+        [yearNavigator]="true"
+        [monthNavigator]="true"
+        [yearRange]="yearRange"
+        dateFormat="M yy"
+        [showButtonBar]="true"
+        view="month"
+        styleClass="w-full"
+        inputStyleClass="form-input bg-white"
+        [ngClass]="{'error-datepicker': invalid}"
+        [inputStyle]="{'background-color': 'white', 'border-color': '#e5e7eb'}"
+        [style]="{'background-color': 'white'}"
+        [placeholder]="placeholder"
+        [appendTo]="'body'">
+      </p-datePicker>
+    </div>
+    
+    <!-- Present Checkbox -->
+    <div class="flex items-center" *ngIf="allowPresent">
+      <input type="checkbox" [id]="getSafeId()" class="h-4 w-4 text-blue-600 rounded border-gray-300 mr-2"
+             [checked]="isPresent"
+             (change)="togglePresentCheckbox($event)">
+      <label [for]="getSafeId()" class="text-gray-700 text-sm whitespace-nowrap">Present</label>
+    </div>
+  </div>
+  
+  <p *ngIf="invalid && errorMessage" class="mt-1 text-sm text-red-600">
+    {{ errorMessage }}
+  </p>
+</div>

@@ -1,0 +1,133 @@
+/* Styles for the month-year picker component */
+.month-year-picker {
+  margin-bottom: 0.75rem;
+}
+
+/* Make sure inputs have rounded corners */
+.month-year-picker .p-calendar .p-inputtext {
+  border-radius: 0.5rem !important;
+  width: 100% !important;
+  height: 42px !important;
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 0.5rem 1rem !important;
+  color: #374151 !important;
+  font-size: 0.875rem !important;
+}
+
+/* Error styling */
+.month-year-picker .error-datepicker .p-inputtext {
+  border-color: #EF4444 !important;
+}
+
+/* PrimeNG calendar popup styling */
+.p-datepicker {
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.p-datepicker table,
+.p-datepicker tbody,
+.p-datepicker tr,
+.p-datepicker th,
+.p-datepicker td,
+.p-datepicker-header,
+.p-monthpicker,
+.p-yearpicker {
+  background-color: white !important;
+}
+
+.p-datepicker-header {
+  background-color: #f9fafb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  background-color: #eff6ff !important;
+  color: #3b82f6 !important;
+}
+
+.p-datepicker table td.p-highlight > span {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.p-datepicker table td > span:hover {
+  background-color: #f3f4f6 !important;
+}
+  /* IMPORTANT: Force white background everywhere */
+  .p-inputtext,
+  .p-calendar input,
+  input.p-inputtext,
+  .p-datepicker-trigger,
+  .p-calendar .p-inputtext {
+    background: white !important;
+    background-color: white !important;
+  }
+  
+  /* Make sure inputs have rounded corners now that we removed the icon */
+  .p-calendar .p-inputtext {
+    border-radius: 0.5rem !important;
+    width: 100% !important;
+  }
+  
+  /* Force white background on datepicker panel */
+  .p-datepicker,
+  .p-datepicker-panel,
+  .p-component {
+    background: white !important;
+    background-color: white !important;
+  }
+  
+  /* All cells must have white background */
+  .p-datepicker td,
+  .p-datepicker th,
+  .p-datepicker tr,
+  .p-datepicker table,
+  .p-datepicker tbody,
+  .p-datepicker-calendar,
+  .p-datepicker-calendar-container {
+    background: white !important;
+    background-color: white !important;
+  }
+  
+  /* Fix for calendar panel */
+  .p-datepicker {
+    background: white !important;
+    background-color: white !important;
+  }
+  
+  /* Ensure form is consistent */
+  input, select, textarea, .p-calendar .p-inputtext {
+    height: 42px !important;
+    background-color: white !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid #e5e7eb !important;
+    padding: 0.5rem 1rem !important;
+    color: #374151 !important;
+  }
+  
+  /* Style the calendar button */
+  .p-datepicker-trigger {
+    height: 42px !important;
+    background-color: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-left: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Fix calendar with button styles */
+  .p-calendar.p-calendar-w-btn .p-inputtext {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  /* Style trigger button */
+  .p-datepicker-trigger {
+    border-top-right-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+  }

@@ -1,59 +1,63 @@
-# CvBuilder
+# CV Builder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+A modern web application for creating professional CVs with ease. This project allows users to input their personal information, work experiences, education, skills, and more through a user-friendly form. The data can then be generated into a well-formatted PDF CV.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **User-friendly Form**: Simple and intuitive interface for entering CV data
+- **PDF Generation**: Convert your CV data into a professionally formatted PDF
+- **Import/Export Functionality**: Save your progress by exporting CV data as JSON, and import it later
+- **Responsive Design**: Works on desktop and mobile devices
+- **Modern UI**: Built with Tailwind CSS for a clean, modern look
 
+## Technologies Used
+
+- Angular 17+
+- TypeScript
+- Tailwind CSS
+- PrimeNG (for components like DatePicker)
+- html2pdf.js (for PDF generation)
+
+## Installation
+
+1. Clone the repository:
 ```bash
-ng serve
+git clone https://github.com/yourusername/cv-builder.git
+cd cv-builder
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Install dependencies:
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Run the development server:
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+4. Open your browser and navigate to `http://localhost:4200`
 
-To build the project run:
+## Usage
 
-```bash
-ng build
-```
+1. **Start a New CV**: Click "Fill Form" on the landing page
+2. **Fill in Your Information**: Enter your personal details, work experience, education, etc.
+3. **Generate CV**: Click the "Generate CV" button to create your PDF
+4. **Save Your Data**: Use the "Export JSON" button to save your CV data for later use
+5. **Import Existing Data**: Use the "Import JSON" button to load previously saved CV data
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project Structure
 
-## Running unit tests
+- `src/app/landing-page`: Landing page component
+- `src/app/cv-form`: Form for inputting CV data
+- `src/app/pdf-view`: PDF view/generation component
+- `src/app/month-year-picker`: Custom date picker component
+- `src/app/services`: Data services for handling CV data
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## License
 
-```bash
-ng test
-```
+MIT
 
-## Running end-to-end tests
+## Author
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Your Name

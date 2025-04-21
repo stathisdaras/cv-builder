@@ -1,0 +1,80 @@
+/* Global overrides for PrimeNG calendar styles */
+
+/* Important note: This file is loaded last to override any PrimeNG styles */
+
+/* Force white background on datepicker panel */
+.p-datepicker.p-component,
+.p-datepicker-panel.p-component {
+  background: white !important;
+  background-color: white !important;
+  color: #374151 !important;
+}
+
+/* Force white background on all datepicker elements */
+.p-datepicker table,
+.p-datepicker table tbody,
+.p-datepicker table tr,
+.p-datepicker table td,
+.p-datepicker table th,
+.p-datepicker-header,
+.p-datepicker-buttonbar,
+.p-monthpicker,
+.p-yearpicker,
+.p-datepicker-calendar-container,
+.p-datepicker .p-datepicker-header,
+.p-datepicker .p-datepicker-buttonbar {
+  background: white !important;
+  background-color: white !important;
+}
+
+/* Calendar Header */
+.p-datepicker .p-datepicker-header {
+  background-color: #f9fafb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Ensure all cells have white background */
+.p-datepicker table td {
+  background-color: white !important;
+}
+
+/* Style the month/year view dropdowns */
+.p-datepicker .p-datepicker-header .p-datepicker-title select {
+  background-color: white !important;
+}
+
+/* Style the today cell */
+.p-datepicker table td.p-datepicker-today > span {
+  background-color: #eff6ff !important;
+  color: #3b82f6 !important;
+}
+
+/* Fix the calendar button bar */
+.p-datepicker-buttonbar {
+  background-color: white !important;
+  border-top: 1px solid #e5e7eb !important;
+}
+
+/* Fix calendar button styling */
+.p-datepicker-buttonbar .p-button {
+  background-color: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Update for inputs without calendar icons */
+.p-calendar:not(.p-calendar-w-btn) .p-inputtext {
+  border-radius: 0.5rem !important;
+  width: 100% !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* Fix border style for calendar inputs */
+.p-calendar .p-inputtext {
+  border: 1px solid #e5e7eb !important;
+  width: 100% !important;
+}
+
+/* Add padding to make text more visible */
+.p-calendar input.p-inputtext {
+  padding-left: 1rem !important;
+}

@@ -1,0 +1,87 @@
+{
+  "name": "John Doe",
+  "title": "Senior Software Engineer",
+  "email": "john.doe@example.com",
+  "phone": "+1 (555) 123-4567",
+  "briefProfile": "Experienced software engineer with a strong background in web development and cloud technologies. Passionate about creating efficient, scalable solutions.",
+  "skills": [
+    {
+      "category": "Programming Languages",
+      "items": ["JavaScript", "TypeScript", "Python", "Java"]
+    },
+    {
+      "category": "Web Technologies",
+      "items": ["HTML", "CSS", "React", "Angular", "Node.js"]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "items": ["AWS", "Docker", "Kubernetes", "CI/CD"]
+    }
+  ],
+  "workExperiences": [
+    {
+      "position": "Senior Software Engineer",
+      "company": "Tech Solutions Inc.",
+      "startDate": "Jan 2020",
+      "endDate": "Present",
+      "description": "Leading development of cloud-native applications and microservices architecture.",
+      "mainContributions": [
+        "Implemented CI/CD pipeline reducing deployment time by 70%",
+        "Designed and developed microservices architecture serving 1M+ users",
+        "Mentored junior developers and conducted code reviews"
+      ],
+      "techStack": ["React", "Node.js", "AWS", "Docker", "Kubernetes"]
+    },
+    {
+      "position": "Software Engineer",
+      "company": "Web Innovations Ltd",
+      "startDate": "Jun 2017",
+      "endDate": "Dec 2019",
+      "description": "Developed and maintained web applications using modern JavaScript frameworks.",
+      "mainContributions": [
+        "Built responsive web applications using Angular and React",
+        "Optimized database queries improving performance by 40%",
+        "Implemented automated testing increasing test coverage to 85%"
+      ],
+      "techStack": ["Angular", "React", "Node.js", "MongoDB", "Express"]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science in Computer Science",
+      "institution": "University of Technology",
+      "startDate": "Sep 2015",
+      "endDate": "May 2017",
+      "thesis": "Distributed Systems for Scalable Web Applications",
+      "supervisor": "Dr. Jane Smith"
+    },
+    {
+      "degree": "Bachelor of Science in Software Engineering",
+      "institution": "State University",
+      "startDate": "Sep 2011",
+      "endDate": "May 2015"
+    }
+  ],
+  "certifications": [
+    {
+      "certificationName": "AWS Certified Solutions Architect",
+      "institution": "Amazon Web Services"
+    },
+    {
+      "certificationName": "Google Cloud Professional Developer",
+      "institution": "Google Cloud"
+    }
+  ],
+  "languages": [
+    {
+      "name": "English",
+      "proficiency": 5
+    },
+    {
+      "name": "Spanish",
+      "proficiency": 3
+    }
+  ],
+  "interests": ["Hiking", "Photography", "Reading", "Traveling"],
+  "references": "Available upon request"
+} 

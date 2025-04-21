@@ -1,0 +1,135 @@
+{
+  "name": "Alisson Burgers",
+  "email": "alisson.burgers@example.com",
+  "phone": "+44 151 123 4567",
+  "title": "Professional Football Goalkeeper",
+  "profileImage": "",
+  "briefProfile": "Elite goalkeeper with exceptional shot-stopping abilities and distribution skills. Known for quick reflexes, commanding presence in the box, and ability to initiate attacks from the back. UEFA Champions League winner and Premier League champion.",
+  "skills": {
+    "Goalkeeping": [
+      "Shot Stopping",
+      "Aerial Control",
+      "Distribution",
+      "One-on-One",
+      "Positioning",
+      "Leadership"
+    ],
+    "Technical": [
+      "Ball Control",
+      "Long Pass Accuracy",
+      "Game Reading",
+      "Penalty Saving",
+      "Cross Handling"
+    ],
+    "Physical": [
+      "Agility",
+      "Reflexes",
+      "Strength",
+      "Speed",
+      "Stamina"
+    ],
+    "Mental": [
+      "Decision Making",
+      "Communication",
+      "Concentration",
+      "Composure",
+      "Team Leadership"
+    ]
+  },
+  "workExperiences": [
+    {
+      "company": "Liverpool FC",
+      "position": "First Team Goalkeeper",
+      "startDate": "Jul 2018",
+      "endDate": "Present",
+      "description": "Premier League and Champions League winning goalkeeper for one of England's most successful clubs.",
+      "mainContributions": [
+        "UEFA Champions League victory in 2019",
+        "Premier League championship in 2020",
+        "Golden Glove winner for most clean sheets",
+        "Revolutionized the team's playing style from the back",
+        "Mentored young goalkeepers in the academy"
+      ],
+      "techStack": [
+        "Shot Stopping",
+        "Distribution",
+        "Aerial Control",
+        "Leadership",
+        "Game Management"
+      ]
+    },
+    {
+      "company": "AS Roma",
+      "position": "First Choice Goalkeeper",
+      "startDate": "Jul 2016",
+      "endDate": "Jun 2018",
+      "description": "Key player in Roma's successful Champions League campaign and Serie A performances.",
+      "mainContributions": [
+        "Champions League semi-final appearance in 2018",
+        "Highest save percentage in Serie A 2017/18",
+        "Implemented modern goalkeeper distribution techniques",
+        "Developed strong communication with defensive line"
+      ],
+      "techStack": [
+        "Reflexes",
+        "Positioning",
+        "Ball Distribution",
+        "Team Organization"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Internacional Football Academy, Brazil",
+      "degree": "Professional Football Development Program",
+      "startDate": "Jan 2008",
+      "endDate": "Dec 2012",
+      "thesis": "Modern Goalkeeping: The Evolution of the Position",
+      "supervisor": "Coach Roberto Oliveira"
+    }
+  ],
+  "certifications": [
+    {
+      "certificationName": "UEFA Professional Goalkeeping License",
+      "institution": "UEFA Coaching Convention"
+    },
+    {
+      "certificationName": "Advanced Goalkeeping Techniques",
+      "institution": "Brazilian Football Confederation"
+    },
+    {
+      "certificationName": "Sports Leadership & Management",
+      "institution": "Sports Excellence Institute"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Portuguese",
+      "institute": "Native Speaker",
+      "proficiency": "C2"
+    },
+    {
+      "name": "English",
+      "institute": "Cambridge Assessment",
+      "proficiency": "C1"
+    },
+    {
+      "name": "Spanish",
+      "institute": "Instituto Cervantes",
+      "proficiency": "B2"
+    },
+    {
+      "name": "Italian",
+      "institute": "Dante Alighieri Society",
+      "proficiency": "B2"
+    }
+  ],
+  "interests": [
+    "Football Tactics & Analysis",
+    "Youth Goalkeeper Mentoring",
+    "Fitness Training",
+    "Sports Psychology",
+    "Charitable Work"
+  ],
+  "references": "Available upon request"
+} 
